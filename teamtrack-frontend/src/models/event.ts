@@ -4,6 +4,7 @@ export interface Event {
   description: String;
   location: String;
   date: string;
+  time: string;
 }
 
 export interface State {
