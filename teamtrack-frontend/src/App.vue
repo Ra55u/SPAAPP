@@ -1,25 +1,25 @@
 <template>
-  <Column v-if="check">
-    <Navbar /> 
-  </Column>
-<router-view />
+    <template v-if="shouldShowNavbar">
+      <Navbar />
+    </template>
+    <router-view />
 </template>
 
-
-
 <script setup lang="ts">
-    import Navbar from "./components/Navbar.vue";
-    import {defineProps, watch} from "vue";
-    import { useRoute } from "vue-router";
-    defineProps<{ isAthlete: Boolean, hasChosen: Boolean}>();
+import Navbar from "./components/Navbar.vue";
+import { useRoute } from "vue-router";
+import { defineProps, computed } from "vue";
+const { isAthlete, hasChosen } = defineProps<{
+  isAthlete: Boolean;
+  hasChosen: Boolean;
+}>();
 
-    const route = useRoute();
-    var check = Boolean();
+const route = useRoute();
 
-    watch(route); {
-  if (route.path = "/"){
-    check = true;
-  }}
+const shouldShowNavbar = computed(() => {
+  // Check if the current route is not the homepage
+  return route.name !== "Avaleht";
+});
 </script>
 
 <style>
