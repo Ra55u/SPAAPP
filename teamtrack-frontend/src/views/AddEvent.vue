@@ -13,6 +13,5 @@ const event = ref<Event>({
   description: "",
   location: "",
   date: new Date().toISOString(),
-  time: new Time().toISOString(),
 });
 </script>

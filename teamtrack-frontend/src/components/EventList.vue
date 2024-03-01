@@ -7,9 +7,17 @@
       <DataTable :value="events" v-if="events.length > 0">
         <Column field="type" header="Nimetus" />
         <Column field="location" header="Asukoht" />
-        <Column field="date" header="Kuupäev" />
-        <Column field="time" header="Kellaaeg" />
-        <Column v-if="!isAthlete">
+        <Column header="Kuupäev">
+          <template #body="{ data }">
+            {{ formatDateTime(data.date).date }}
+          </template>
+          </Column>
+          <Column class="w-30" header="Kellaaeg" >
+          <template #body="{ data }">
+            {{ formatDateTime(data.date).time }}
+            </template>
+          </Column>
+          <column v-if="!isAthlete">
           <template #body="{ data }">
             <router-link
                 class="border bg-blue-400 text-blue-900 py-0 px-2 mx-2 border-red-900 font-bold"
@@ -50,6 +58,7 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
 import { Event } from '@/models/event';
 import { useEventsStore } from "@/stores/eventsStore";
@@ -86,6 +95,17 @@ onMounted(() => {
 
 const remove = (event: Event) => {
   eventsStore.deleteEvent(event);
+};
+
+const formatDateTime = (isoString: string) => {
+  const datetime = new Date(isoString);
+  const timeZone = 'UTC';
+  const optionsDate: Intl.DateTimeFormatOptions = {year: 'numeric', month: '2-digit', day: '2-digit', timeZone: timeZone };
+  const optionsTime: Intl.DateTimeFormatOptions = {hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timeZone };
+  return {
+    date: datetime.toLocaleDateString(undefined, optionsDate),
+    time: datetime.toLocaleTimeString(undefined, optionsTime)
+  };
 };
 
 </script>
