@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import AddEventForm from '@/components/AddEventForm.vue';
+import AddEventForm from '@/components/UpdateEventForm.vue';
 import { Event } from '@/models/event';
 import { useEventsStore } from '@/stores/eventsStore';
 import { onMounted, ref } from 'vue';
@@ -17,7 +17,7 @@ const event = ref<Event>({
   type: "",
   description: "",
   location: "",
-  date: new Date().toISOString(),
+  date: new Date().toISOString(), 
 });
 
 onMounted(async () => {

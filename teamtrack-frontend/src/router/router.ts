@@ -33,6 +33,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Uuenda harjutust',
     component: UpdateEventVue,
   },
+  {
+    path: '/people',
+    name: 'People',
+    component: 'people',
+  },
 
 ];
 

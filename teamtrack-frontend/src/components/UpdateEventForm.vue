@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="font-bold">Lisa uus sündmus</h1>
+    <h1 class="font-bold">Uuenda sündmust</h1>
 
     <div class="min-h-full flex items-center justify-center py-0 px- sm:px-6 lg:px-8">
       <form class="max-w-md w-full space-y-9">
@@ -66,7 +66,7 @@
               @click.prevent="submitForm"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Lisa sündmus
+              Uuenda sündmust
             </button>
           </div>
         </div>
@@ -92,7 +92,7 @@ const props = defineProps({
 const localEvent = ref({...props.event});
 const time = ref('');
 
-const { addEvent } = useEventsStore();
+const { updateEvent } = useEventsStore();
 const router = useRouter();
 
 watchEffect(() => {
@@ -109,7 +109,7 @@ const submitForm = () => {
   const eventData = { ...localEvent.value, date: isoDate };
 
   if (Number(localEvent.value.id) === 0) {
-    addEvent(eventData);
+    updateEvent(eventData);
   }
 
   // Navigate to the events page after submitting
